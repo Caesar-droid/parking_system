@@ -1,4 +1,4 @@
-from django.forms import ModelForm, fields, models
+from django.forms import ModelForm
 from .models import ParkingLot,Person,Vehicle
 
 class PersonForm(ModelForm):

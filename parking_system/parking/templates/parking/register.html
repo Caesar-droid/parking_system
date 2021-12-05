@@ -1,22 +1,28 @@
  {% extends 'parking/base.html'%}
+ {%load static%}
  {% block content%}
- <form id="regForm" >
+ 
+ <form id="regForm" method="POST" >
+  {% csrf_token %}
     <h1>Register:</h1>
     <!-- One "tab" for each step in the form: -->
-    <div class="tab">Person's Info:
+    <div class="tab">Person's Info:<br>
+     
       {{person_form}}
     </div>
-    <div class="tab">Vehicle Info:
+    <div class="tab">Vehicle Info:<br>
+     
     {{vehicle_form}}
     </div>
-    <div class="tab">Parking:
+    <div class="tab">Parking:<br>
+      
       {{parking_form}}
     </div>
    
     <div style="overflow:auto;">
       <div style="float:right;">
         <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-        <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+        <button type="submit" id="nextBtn" onclick="nextPrev(1)">Next</button>
       </div>
     </div>
     <!-- Circles which indicates the steps of the form: -->
