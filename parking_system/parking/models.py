@@ -17,6 +17,6 @@ class Vehicle(models.Model):
 class ParkingLot(models.Model):
     vehicle=models.OneToOneField(Vehicle,null=True,blank=True,on_delete=models.SET_NULL)
     available=models.BooleanField(default=False)
-    start_time=models.DateField()
-    end_time=models.DateField()
-    paid_amount=models.IntegerField()
+    start_time=models.DateField(null=True,blank=True)
+    end_time=models.DateField(null=True,blank=True)
+    paid_amount=models.IntegerField(null=True,blank=True)

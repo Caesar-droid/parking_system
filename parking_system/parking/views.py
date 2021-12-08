@@ -10,26 +10,21 @@ class RegisterView(View):
         print(request)
         return render(request,'parking/register.html',{'person_form':PersonForm,'vehicle_form':VehicleForm,'parking_form':ParkingLotForm })
 
-    def post(request,*args,**kwargs):
-        if request.GET == True:
-            pform=PersonForm(request.POST)
-            vform=VehicleForm(request.POST)
-            lform=ParkingLotForm(request.POST)
-            if pform.is_valid()  and vform.is_valid() and lform.is_valid() :
-                pform.save()
-                vform.save()
-                lform.save() 
-            return render(request,'parking/home.html')
-# def register(request):
-#      if request.GET == True:
-#             pform=PersonForm(request.POST)
-#             vform=VehicleForm(request.POST)
-#             lform=ParkingLotForm(request.POST)
-#             if pform.is_valid()  and vform.is_valid() and lform.is_valid() :
-#                 pform.save()
-#                 vform.save()
-#                 lform.save() 
-#             return render(request,'parking/home.html',context_instance=RequestContext(request))
-#      elif request.method == "GET":
-#         return render(request,'parking/register.html',{'person_form':PersonForm,'vehicle_form':VehicleForm,'parking_form':ParkingLotForm })
+    def post(self,request,*args,**kwargs):
+       
+        pform=PersonForm(request.POST)
+        if pform.is_valid():
+            person=pform.save()
+            post_data=request.POST.copy()
+            post_data['driver']=person.pk
+        vform=VehicleForm(post_data)
+        if vform.is_valid():
+            vehicle=vform.save()
+            post_data=request.POST.copy()
+            post_data['vehicle']=vehicle.pk
+        lform=ParkingLotForm(post_data)
+        if lform.is_valid():
+            lform.save()
+        return render(request,'parking/home.html')
+
     
