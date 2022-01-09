@@ -1,0 +1,46 @@
+{% extends 'parking/base.html'%}
+{%load static%}
+{% block content%}
+
+<form id="regForm" method="post" >
+ {% csrf_token %}
+   <!-- One "tab" for each step in the form: -->
+ 
+   <div class="tab">Parking Info:<br>
+   {{form}}
+   </div>
+  
+   <div style="overflow:auto;">
+     <div style="float:right;">
+       <button type="submit" id="nextBtn">Save</button>
+     </div>
+   </div>
+   <div>
+    <h5>Allocated Parking Lots</h5>
+    {%for lot in allocated_lots%}
+    <p>Parking lot ID: {{lot.pk}}</p>
+    <p>Parking location: {{lot.pk}}</p>
+    <p>Vehicle Type: {{lot.vehicle.car_type}}</p>
+    <p>Vehicle Plate: {{lot.vehicle.car_plate}}</p>
+    <p>Start Time: {{lot.start_time}}</p>
+    <p>End Time: {{lot.end_time}}</p>
+    <hr>
+    {%endfor%}
+
+
+    <h5>Available Parking Lots</h5>
+    {%for lot in available_lots%}
+    <p>Parking lot ID: {{lot.pk}}</p>
+    <p>Parking location: {{lot.pk}}</p>
+
+    <hr>
+    {%endfor%}
+</div>
+ </form>
+
+{% endblock%}
+
+  
+   
+ 
+  
